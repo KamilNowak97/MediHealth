@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h2 style="text-align:center">Table of pressure measurements </h2>
+    <div class ="content">
+    {% if schedules|length < 1 %}
+    <h4 style="text-align:center">There are no schedules!</h4>
+    {% else  %}
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>About</th>
+            <th>Amount</th>
+            <th>Interval</th>
+            <th>Recommendations</th>
+        </tr>
+
+{% for schedule in schedules %}
+            <tr>
+                <th>{{schedule.id }}</th>
+                <th>{{schedule.name }}</th>
+                <th>{{schedule.about }}</th>
+                <th>{{schedule.amount }}</th>
+                <th>{{schedule.interval }}</th>
+                <th>{{schedule.recommendations }}</th>
+
+
+
+
+                <th>
+                    <a href = "">Delete</a>
+                    <br>
+                    <a href = "">Upload</a>
+                </th>
+
+            </tr>
+        {% endfor %}
+
+
+    </table>
+    {% endif %}
+    </div>
+    <div id="input-form"></div>
+        <form action ="/medicines" method="POST">
+            <input type="text" name="name_m" id="name_m" placeholder="name">
+            <input type="text" name="about_m" id="about_m" placeholder="about ">
+            <input type="text" name="amount_m" id="amount_m" placeholder="amount">
+            <input type="text" name="interval_m" id="interval_m" placeholder="interval ">
+            <input type="text" name="recom_m" id="recom_m" placeholder="recommendations">
+             <input type="submit" value="Add schedule">
+        </form>
+    </div>
+
+{% endblock %}
+

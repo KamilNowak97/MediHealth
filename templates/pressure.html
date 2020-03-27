@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h2 style="text-align:center">Table of pressure measurements </h2>
+    <div class ="content">
+    {% if measurements|length < 1 %}
+    <h4 style="text-align:center">There are no measurements!</h4>
+    {% else  %}
+
+    <table>
+        <tr>
+            <th>Systolic</th>
+            <th>Diastolic</th>
+            <th>Pulse</th>
+            <th>Hour</th>
+            <th>Minute</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        {% for measurement in measurements %}
+            <tr>
+                <th>{{measurement.systolic}}</th>
+                <th>{{measurement.diastolic}}</th>
+                <th>{{measurement.pulse}}</th>
+                <th>{{measurement.hour}}</th>
+                <th>{{measurement.minute}}</th>
+                <th>{{measurement.date_created.date() }}</th>
+
+                <th>
+                    <a href = "/delete/{{measurement.id}}">Delete</a>
+                    <br>
+                    <a href = "/pressure/update/{{measurement.id}}">Upload</a>
+                </th>
+
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action ="/pressure" method="POST">
+        <input type="text" name="systolic" id="systolic" placeholder="Systolic">
+        <input type="text" name="diastolic" id="diastolic" placeholder="Diastolic ">
+        <input type="text" name="pulse" id="pulse" placeholder="Pulse">
+        <input type="text" name="hour" id="hour" placeholder="Hour ">
+        <input type="text" name="minute" id="minute" placeholder="Minute">
+         <input type="submit" value="Add measurment">
+
+    </form>
+
+
+    </div>
+
+{% endblock %}
+
